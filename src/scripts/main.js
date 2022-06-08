@@ -3,9 +3,9 @@
 
 const boardGame = document.querySelector('.game-field');
 const btnStart = document.querySelector('.start');
-const startMessage = document.querySelector('.message-start');
-const winMessage = document.querySelector('.message-win');
-const loseMessage = document.querySelector('.message-lose');
+const startMessage = document.querySelector('.message_start');
+const winMessage = document.querySelector('.message_win');
+const loseMessage = document.querySelector('.message_lose');
 const scoreBoard = document.querySelector('.game-score');
 const controls = document.querySelector('.controls');
 let score = 0;
@@ -18,7 +18,7 @@ function matrix() {
     [0, 0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0],
-  ]
+  ];
 }
 
 let grid = matrix();
@@ -39,7 +39,7 @@ btnStart.addEventListener('click', getStart);
 function getStart() {
   btnStart.remove();
   controls.append(createRestartButton());
-  startMessage.classList.add('hidden');
+  startMessage.classList.add('message_hidden');
   getRandomNumber();
   getRandomNumber();
   createBoard();
@@ -53,13 +53,12 @@ function getReset() {
   getStart();
   scoreBoard.innerText = 0;
   score = 0;
-  winMessage.classList.add('hidden');
-  loseMessage.classList.add('hidden');
+  winMessage.classList.add('message_hidden');
+  loseMessage.classList.add('message_hidden');
 };
 
 // create board game
 function createBoard() {
-
   for (let i = 0; i < width; i++) {
     for (let j = 0; j < width; j++) {
       const cell = boardGame.rows[i].cells[j];
@@ -106,7 +105,6 @@ function copyGrid(arrGrid) {
 
   for (let i = 0; i < width; i++) {
     for (let j = 0; j < width; j++) {
-
       extraGrid[i][j] = arrGrid[i][j];
     }
   }
@@ -157,7 +155,7 @@ function getMove(direction) {
     grid[i] = sliding(grid[i]);
     getSumOfNumber(grid[i]);
     grid[i] = sliding(grid[i]);
-}
+  }
 
   const changed = compare(past, grid);
 
@@ -167,7 +165,7 @@ function getMove(direction) {
 
   if (rotate) {
     grid = rotateGrid(grid, -1);
-}
+  }
 
   if (changed) {
     getRandomNumber();
@@ -198,7 +196,7 @@ function rotateGrid(gridArr, direction) {
 
 // // the sum of two the same numbers
 function getSumOfNumber(row) {
-  for (let i = width - 1; i >= 1; i--) { 
+  for (let i = width - 1; i >= 1; i--) {
     if (row[i] === row[i - 1]) {
       row[i] = row[i] + row[i - 1];
       row[i - 1] = 0;
@@ -237,7 +235,7 @@ function control(e) {
 function checkOnWin() {
   grid.map((el, i) => {
     if (el[i] === win) {
-      winMessage.classList.remove('hidden');
+      winMessage.classList.remove('message_hidden');
       btnStart.classList.remove('restart');
       btnStart.classList.add('start');
       document.removeEventListener('keyup', control);
@@ -257,8 +255,8 @@ function checkLose() {
   }
 
   if (count === 0) {
-    loseMessage.classList.remove('hidden');
-    winMessage.classList.add('hidden');
+    loseMessage.classList.remove('message_hidden');
+    winMessage.classList.add('message_hidden');
     document.removeEventListener('keyup', control);
   }
 };
